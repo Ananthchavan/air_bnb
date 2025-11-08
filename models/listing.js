@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const listingSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    description: String,
+    image: {
+    filename: {
+        type: String,
+        default: "listingimage",
+    },
+    url: {
+        type: String,
+        default: "https://via.placeholder.com/400",
+        set: (v) => v === "" ? "https://via.placeholder.com/400" : v,
+    },
+},
+    price: Number,
+    location: String,
+    country: String
+});
+
+const Listing  = mongoose.model("Listing" , listingSchema);
+module.exports = Listing;
