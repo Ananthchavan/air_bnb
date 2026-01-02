@@ -13,8 +13,13 @@ router.post("/signup" , wrapAsync(async(req,res) => {
         let {username , email , password} = req.body;
         const newUser = new User({email , username});
         const registeredUser = await User.register(newUser , password);
+        req.login(registeredUser , (err) => {
+          if(err) {
+            return next(err);          
+          }
         req.flash("sucess" , "Welcome to WnaderLust");
         res.redirect("/listings");
+        })
     } catch(e){
         req.flash("error" , e.message);
         res.redirect("/signup");
@@ -37,5 +42,14 @@ router.post(
   }
 );
 
+router.get("/logout" , (req,res,next) => {
+  req.logout( (err) => {
+    if(err) {
+      return next(err);
+    }
+    req.flash("sucess" , "You are Logged out!");
+    res.redirect("/listings");
+  })
+})
 
 module.exports = router;
