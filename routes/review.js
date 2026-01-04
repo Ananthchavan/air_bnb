@@ -5,16 +5,7 @@ const ExpressError = require("../utils/ExpressError.js");
 const {listingSchema , reviewSchema} = require("../schema.js");
 const Review = require("../models/review.js");
 const Listing = require("../models/listing.js");
-
-const validateReview = (req,res,next) => {
-        let {error} = reviewSchema.validate(req.body);
-        if(error){
-           let errMsg = error.details.map(el => el.message).join(", "); 
-            throw new ExpressError(400 , error);
-        } else {
-            next();
-        }
-}
+const {validateReview} = require("../middleware.js");
 
 //Post Route
 router.post("/" , validateReview , wrapAsync(async(req,res) => {
