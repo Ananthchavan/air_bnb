@@ -23,7 +23,14 @@
 
         <div class="mb-3">
             <lable for="image" class="form-lable">Image Link</lable>
-            <input type="text" required name="listing[image]" value="<%= listing.image %>" class="form-control"/>
+            <input 
+            type="text" 
+            required 
+            name="listing[image]" 
+            value="<%= listing.image.url %>" 
+            class="form-control"
+            />
+
         </div>
 
         
